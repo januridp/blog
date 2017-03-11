@@ -1,0 +1,12 @@
+siteTitle = "Blog by Riza Fahmi"
+siteDescr = "Online personal scratchpad of one polyglot developer who loves to learn bleeding edge, new technology and enjoy to share with fellow developers."
+siteAuthor = "Riza Fahmi"
+
+siteTwitterUrl = "https://twitter.com/rizafahmi22"
+siteGithubUrl = "https://github.com/rizafahmi"
+siteEmailUrl = "rizafahmi@gmail.com"
+siteRssUrl = "#"
+
+googleAnalyticsId = ""
+
+linkPrefix = "/gatsby-starter-lumen"
