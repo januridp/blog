@@ -8,23 +8,37 @@ class SiteLinks extends React.Component {
     return (
       <div className='blog-links'>
         <ul>
+          {config.siteFacebookUrl && (
+            <li>
+              <a target='_blank' href={config.siteFacebookUrl}>
+                <i className='fa fa-facebook' />
+              </a>
+            </li>
+          )}
+          {config.siteLinkedinUrl && (
+            <li>
+              <a target='_blank' href={config.siteLinkedinUrl}>
+                <i className='fa fa-linkedin' />
+              </a>
+            </li>
+          )}
           {config.siteTwitterUrl && (
             <li>
-              <a href={config.siteTwitterUrl}>
+              <a target='_blank' href={config.siteTwitterUrl}>
                 <i className='fa fa-twitter' />
               </a>
             </li>
           )}
           {config.siteGithubUrl && (
             <li>
-              <a href={config.siteGithubUrl}>
+              <a target='_blank' href={config.siteGithubUrl}>
                 <i className='fa fa-github-alt' />
               </a>
             </li>
           )}
           {config.siteVkUrl && (
             <li>
-              <a href={config.siteVkUrl}><i className='fa fa-vk' /></a>
+              <a target='_blank' href={config.siteVkUrl}><i className='fa fa-vk' /></a>
             </li>
           )}
           {config.siteEmailUrl && (
@@ -36,8 +50,15 @@ class SiteLinks extends React.Component {
           )}
           {config.siteTelegramUrl && (
             <li>
-              <a href={config.siteTelegramUrl}>
+              <a target='_blank' href={config.siteTelegramUrl}>
                 <i className='fa fa-paper-plane' />
+              </a>
+            </li>
+          )}
+          {config.siteMediumUrl && (
+            <li>
+              <a target='_blank' href={config.siteMediumUrl}>
+                <i className='fa fa-medium' />
               </a>
             </li>
           )}
