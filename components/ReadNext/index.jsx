@@ -45,4 +45,3 @@ ReadNext.propTypes = {
 }
 
 export default ReadNext
-

@@ -24,8 +24,8 @@ class SiteSidebar extends React.Component {
         </Link>
         { isHome ? (
           <h1><Link style={{ textDecoration: 'none', borderBottom: 'none', color: 'inherit' }} to={prefixLink('/')}> {config.siteAuthor}</Link></h1>
-        ) :
-          <h2><Link style={{ textDecoration: 'none', borderBottom: 'none', color: 'inherit' }} to={prefixLink('/')}> {config.siteAuthor}</Link></h2> }
+        )
+          : <h2><Link style={{ textDecoration: 'none', borderBottom: 'none', color: 'inherit' }} to={prefixLink('/')}> {config.siteAuthor}</Link></h2> }
         <p>
           {config.siteDescr}
         </p>
@@ -61,4 +61,3 @@ SiteSidebar.propTypes = {
 }
 
 export default SiteSidebar
-
