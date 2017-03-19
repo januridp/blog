@@ -1,8 +1,8 @@
 ---
-title: ABC - Always Be Coding
+title: 6 Tips Kebiasaan Coding Yang Menjadikan Kamu Super Developer
 date: "2017-03-19T10:49:32.169Z"
 layout: post
-path: "/abc-always-be-coding/"
+path: "/6-tips-kebiasaan-coding/"
 category: "Tips"
 description: "Berikut beberapa tips singkat berlatih coding setiap hari menyulap kamu menjadi developer yang lebih baik."
 ---
@@ -86,4 +86,4 @@ Bahkan website HackerRank mengadakan tantangan 30 days of code yang bisa kita ik
 * [ABC - Always Be Coding, David Byttow](https://medium.com/always-be-coding/abc-always-be-coding-d5f8051afce2#.sdh1eygvw)
 * [Why coding everyday makes a big difference, Coder Radio, Always Be Coding](http://www.jupiterbroadcasting.com/107311/always-be-coding-cr-247/)
 * [5 Reasons To Always be Coding](http://www.humblecoder.com/5-reasons-to-always-be-coding/)
-* [Coder to Developer](https://www.amazon.com/Coder-Developer-Strategies-Delivering-Software/dp/078214327X)
+* [Coder to Developer Book, Mike Gunderloy](https://www.amazon.com/Coder-Developer-Strategies-Delivering-Software/dp/078214327X)
