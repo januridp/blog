@@ -24,14 +24,16 @@
 }
 .sidebar .sidebar-inner h1, .sidebar .sidebar-inner h2 {
 	font-size: 18px;
-	font-weight: 500;
+	font-weight: 700;
 	line-height: 18px;
 	margin: 20px 0 10px;
+  color: #c9cacc;
+
 }
 .sidebar .sidebar-inner p {
-	color: #888;
-	font-size: 16px;
-	line-height: 26px;
+  color: #c9cacc;
+	font-size: 14px;
+	line-height: 21px;
 	margin-bottom: 26px;
 }
 .sidebar .sidebar-inner p.copyright {
