@@ -7,6 +7,8 @@ import ReadNext from '../ReadNext'
 import './style.css'
 import '../../static/css/highlight.css'
 
+import Footer from '../Footer'
+
 class SitePost extends React.Component {
   render () {
     const { route } = this.props
@@ -31,12 +33,7 @@ class SitePost extends React.Component {
           <div className='footer'>
             <ReadNext post={post} {...this.props} />
             <hr />
-            <p>
-              {config.siteDescr}
-              <a href={config.siteTwitterUrl}>
-                <br /> <strong>{config.siteAuthor}</strong> on Twitter
-              </a>
-            </p>
+            <Footer {...this.props} />
           </div>
         </div>
       </div>

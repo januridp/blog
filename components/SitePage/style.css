@@ -1,17 +1,29 @@
 .blog-page {
-	margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 .blog-page h1 {
-	font-size: responsive 20px 36px;
-	margin-top: 0;
+  font-size: responsive 20px 36px;
+  margin-top: 0;
 }
 .blog-page p {
-	font-size: 16px;
-	line-height: 26px;
-	margin-bottom: 26px;
+  font-size: 16px;
+  line-height: 26px;
+  margin-bottom: 26px;
+}
+.blog-page a {
+  color: #c9cacc;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-size: 100% 6px;
+  background-image: linear-gradient(transparent, transparent 5px, #c9cacc 5px, #c9cacc);
+}
+
+.blog-page a:hover {
+  background-image: linear-gradient(transparent, transparent 4px, #d480aa 4px, #d480aa);
+  color: #c9cacc;
 }
 @media (max-width:900px) {
-	.blog-single .text, .blog-single .footer {
-		padding: 0 15px;
-	}
+  .blog-single .text, .blog-single .footer {
+    padding: 0 15px;
+  }
 }

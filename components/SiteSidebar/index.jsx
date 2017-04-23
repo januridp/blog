@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router'
 import { prefixLink } from 'gatsby-helpers'
 import { config } from 'config'
-import SiteNav from '../SiteNav'
-import SiteLinks from '../SiteLinks'
 import './style.css'
 import profilePic from '../../pages/photo.jpg'
+
+import Footer from '../Footer'
+import SiteNav from '../SiteNav'
+import SiteLinks from '../SiteLinks'
 
 class SiteSidebar extends React.Component {
   render () {
@@ -43,12 +45,7 @@ class SiteSidebar extends React.Component {
           </div>
           <div className='blog-options'>
             <SiteNav {...this.props} />
-            <footer>
-              <SiteLinks {...this.props} />
-              <p className='copyright'>
-                &copy; All rights reserved.
-              </p>
-            </footer>
+            <Footer {...this.props} />
           </div>
         </div>
       </div>

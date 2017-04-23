@@ -57,6 +57,10 @@
 .blog-single h1 {
 	text-align: center;
 	margin-top: 30px;
+  letter-spacing: 0.01em;
+  font-style: normal;
+  font-weight: 700;
+  color: #2bbc8a;
 }
 .blog-single .text {
 	line-height: 31px;
@@ -66,10 +70,28 @@
 	max-width: 630px;
 	margin-left: auto;
 	margin-right: auto;
+  hyphens: auto;
 }
 .blog-single .text img {
 	max-width: 100%;
 	height: auto;
+}
+.blog-single .text h2 {
+  font-size: 1rem;
+  position: relative;
+  font-weight: bold;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #eee;
+  line-height: 1.5rem;
+}
+.blog-single .text h2:before {
+  content: "#";
+  color: #2bbc8a;
+  position: absolute;
+  left: -1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 .blog-single .footer {
 	max-width: 630px;
@@ -84,10 +106,10 @@
 	font-size: 16px;
 	text-align: center;
 	padding: 8px 16px;
-	color: #999;
-	background: #f4f4f4;
+	color: #d480aa;
 	font-weight: 400;
 	border-radius: 3px;
+  border: 1px solid #d480aa;
 }
 .gohome:focus {
 	color: #444;
@@ -115,4 +137,9 @@
 		width: 85px;
 		display: block;
 	}
+}
+
+blockquote {
+  color: #ccffb6;
+  font-size: 16px;
 }
