@@ -2,6 +2,7 @@
 title: Social Media Dengan NodeJS dan Graph Database Neo4
 date: "2017-04-23T01:19:31.069Z"
 layout: post
+draft: true
 path: "/nodejs-neo4/"
 category: "Tutorial"
 description: "Tutorial kali ini kita akan membuat sebuah aplikasi social media sederhana menggunakan NodeJS dan Neo4j sebagai graph database."
@@ -62,4 +63,4 @@ Setelah selesai, tutup dan barulah kita nyalakan service neo4j dan ketika sudah 
 
 ### Eksplorasi Neo4j
 
-Mari kita sedikit mengeksplorasi neo4j sebelum menulis *code* untuk aplikasi kita.
+Mari kita sedikit mengeksplorasi neo4j sebelum menulis *code* untuk aplikasi kita. Neo4j mempersiapkan beberapa database 'dummy' sebagai demo untuk kita bereksplorasi. Untuk mencobanya, kita bisa ke menu 'Favorite' yang bergambar ⭐️ kemudian pilih 'Example Graph' dan pilih 'Movie Graph'.
