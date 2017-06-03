@@ -344,17 +344,17 @@ Kita coba eksekusi lagi, nah sekarang _instead of string_, kita dapat tipe datan
 Nah sekarang task terakhir kita, yang adalah mencetak hasilnya. Sebelum mencetak hasilnya, kita tentukan dulu apa yang mau kita cetak. Kita akan menampilkan nama, jumlah public reponya dan follower-nya. Ok, kita buat aja fungsi untuk mencetak hasilnya.
 
 ```javascript
-	let printData = (name, publicRepos, followers) => {
-	 console.log(`${name} owns ${publicRepos} repo(s) and has ${followers} follower(s)`)
-	}
+  let printData = (name, publicRepos, followers) => {
+   console.log(`${name} owns ${publicRepos} repo(s) and has ${followers} follower(s)`)
+  }
 
-	response.on('end', () => {
-	 // [x] Parse the data
-	 let profile = JSON.parse(body)
-	 // [x] Print the data out
-	 // prints out name, publicRepos, followers
-	 printData(profile.name, profile.public_repos, profile.followers)
-	 })
+  response.on('end', () => {
+   // [x] Parse the data
+   let profile = JSON.parse(body)
+   // [x] Print the data out
+   // prints out name, publicRepos, followers
+   printData(profile.name, profile.public_repos, profile.followers)
+   })
 ```
 
 Kita bikin fungsi yang khusus untuk mencetak data tujuannya agar dapat dipakai berulang-ulang. Ingat prinsip DRY, don't repeat yourself.
@@ -373,12 +373,12 @@ Sip! Tugas terakhir kita selesai.
 Aplikasi kita sudah selesai, tapi aplikasi kita saat ini baru memikirkan versi optimis dari alur kerja aplikasi. Gimana seandainya kalau _username_ tidak ditemukan? Kita coba ya. Kita ganti username supaya usernamenya tidak ditemukan.
 
 ```javascript
-	const username = 'usernameasalsajabiartidakketemu'
+  const username = 'usernameasalsajabiartidakketemu'
 ```
 
 Dan kalau kita jalankan, maka akan muncul pesan:
 
-	undefined owns undefined repo(s) and has undefined follower(s)
+  undefined owns undefined repo(s) and has undefined follower(s)
 
 Yup, ini _expected_ ya. Karena aplikasi tidak dapat menemukan data si 'usernameasalsajabiartidakketemu' ini, jadinya undefined. Nah, di artikel ini kita akan meng-handle kesalahan seperti ini. Caranya gimana? Kita bisa memanfaatkan `statusCode`. Jadi kalau statusCode-nya 200 artinya sukses. Selain 200 artinya gagal.
 
@@ -396,7 +396,7 @@ response.on('end', () => {
 Sekarang kita coba lagi, hasilnya sudah cukup user friendly.
 
 ```text
-	Profile with username 'rizafahmi22' not found. (404)
+  Profile with username 'rizafahmi22' not found. (404)
 ```
 
 Pesan _error_ menjadi lebih _user friendly_ kan :)
@@ -407,7 +407,7 @@ Sekarang kita akan me-refactor lebih jauh. Kita akan membuat code kita lebih mod
 
 ```javascript
 
-	profile.get('rizafahmi')
+  profile.get('rizafahmi')
 
 ```
 
@@ -530,4 +530,74 @@ users.map(profile.get)
 
 ```
 
-Wih, elegan sekali! Coba eksekusi lagi. Hasilnya tetap sama!
+Wih, elegan sekali! Coba eksekusi lagi. Hasilnya tetap sama, tentu saja.
+
+## Command Line Argv
+
+Terakhir, saatnya 'menyulap' aplikasi kita menjadi _usable CLI_, atau command line application. Kalau saat ini jika kita ingin mencari tahu profile github seseorang, kita harus edit file `app.js` kita kemudian kita eksekusi dengan cara node app.js. Nah, sekarang biar lebih sempurna, gimana caranya supaya kita bisa dapatkan profil seseorang langsung dari command line tanpa harus bolak-balik mengedit file source kita?!
+
+Sebenarnya cukup mudah secara aplikasi kita sudah modular. Satu _missing piece_-nya adalah gimana cara kita membaca argumen atau parameter dari command line. Nah, di NodeJS ada global variable yang namanya `process` yang bisa kita gunakan untuk ini. Ada di dokumentasi nodejs juga, [disini](https://nodejs.org/dist/latest-v6.x/docs/api/process.html)
+
+Dan ada banyak sebenarnya isi dari process ini. Yang kita butuhkan adalah [argv](https://nodejs.org/dist/latest-v6.x/docs/api/process.html#process_process_argv).
+
+Kalau kita lihat sample code nya cukup jelas ya, cara penggunaannya dan cara mendapatkan parameternya. Mari kita implementasikan ke code kita. Pertama-tama kita coba console dulu aja argv nya.
+
+```javascript
+// app.js
+'use strict'
+
+const profile = require('./profile.js')
+
+console.dir(process.argv, {colors: true})
+```
+
+Dan kemudian kita eksekusi dengan menambahkan parameter setelah `app.js`.
+
+```text
+$ node app.js adhywiranata rizafahmi
+[ '/Users/riza/.nvm/versions/node/v8.0.0/bin/node',
+ '/Users/riza/Developers/NodeJS/blog/firstapp/app.js',
+ 'adhywiranata',
+ 'rizafahmi' ]
+```
+Dan kita akan mendapatkan return dalam bentuk array. Array 0 adalah path ke node kita. Array 1 adalah path ke app kita, dalam hal ini app.js. Nah mulai dari array 2 hingga akhir array itu isinya parameter yang kita input. Jadi kita ambil array kedua hingga terakhir dan kita print setiap username menjadi profile dengan memanggil `profile.get` . Gimana caranya untuk mendapatkan array kedua hingga akhir array? Kita bisa gunakan method `slice` atau potong, harfiahnya. Berikut [dokumentasinya](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/slice).
+
+Sehingga aplikasi kita simply seperti berikut:
+```javascript
+// app.js
+'use strict'
+
+const profile = require('./profile.js')
+
+const users = process.argv.slice(2)
+users.map(profile.get)
+```
+
+Coba sekarang kita jalankan `node app.js adhywiranata rizafahmi tamatamvan`. Dan selesailah aplikasi kita yang cukup berguna dan simpel ini.
+
+```text
+$ node app.js adhywiranata rizafahmi tamatamvan
+Septian A Tama (tamatamvan) owns 50 repo(s) and has 17 follower(s)
+Adhy Wiranata Prasetyo owns 50 repo(s) and has 16 follower(s)
+Riza Fahmi owns 214 repo(s) and has 98 follower(s)
+
+```
+
+
+## Kesimpulan
+
+Banyak sekali hal-hal baru yang sudah kita pelajari bersama. Sebagai penutup mari kita merekap apa saja yang sudah kita pelajari dari artikel ini:
+
+* Apa itu NodeJS
+* Sejarah NodeJS
+* Bagaimana non-blocking bekerja
+* Kenapa menggunakan NodeJS
+* Memulai NodeJS
+* Menggunakan build-in function NodeJS seperti Http dan Https
+* Parsing data dari tipe data string menjadi JavaScript Object
+* Mencetak data ke terminal
+* Error handling sederhana
+* Refactor
+* Menggunakan process.argv untuk membuat aplikasi CLI
+
+Cukup banyak juga ya ternyata. _Congratulations!_ Dan sampai jumpa!
