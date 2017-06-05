@@ -10,6 +10,6 @@ siteMediumUrl = "https://medium.com/@rizafahmi22"
 siteFacebookUrl = "https://www.facebook.com/rizafahmi"
 siteRssUrl = "#"
 
-googleAnalyticsId = ""
+googleAnalyticsId = "UA-100507458-1"
 
 linkPrefix = "/gatsby-starter-lumen"

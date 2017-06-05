@@ -45,6 +45,7 @@ module.exports = React.createClass({
           { title.toComponent() }
           { font }
           { css }
+          <script src='//load.sumome.com/' data-sumo-site-id='1d146cec91ef61ec57b8a3bc005cb7748f559e30494c2852e1d7338bb1b1d9c8' async='async' />
         </head>
         <body>
           <div id='react-mount' dangerouslySetInnerHTML={{ __html: this.props.body }} />

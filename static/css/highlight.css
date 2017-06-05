@@ -24,6 +24,7 @@ pre code {
   overflow-x: auto;
   padding: 0.5em 1em;
   background: #272822; color: #ddd;
+  font-size: 14px;
 }
 .hljs-comment, .hljs-quote {
   color: #998;
