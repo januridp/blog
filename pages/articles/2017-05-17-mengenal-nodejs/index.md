@@ -7,7 +7,27 @@ category: "NodeJS, Introduction"
 description: "Di artikel ini kita akan berkenalan dengan NodeJS, sebuah platform yang memungkinkan kita menggunakan bahasa pemrograman JavaScript di sisi server."
 ---
 
-## Apa itu NodeJS
+Di artikel ini kita akan berkenalan dengan NodeJS, sebuah platform yang memungkinkan kita menggunakan bahasa pemrograman JavaScript di sisi server. Berikut adalah daftar isinya:
+
+* [Apa itu NodeJS](#apa-itu-nodejs)
+* [Kenapa menggunakan NodeJS](#dimana)
+  * [JavaScript Ada Dimana-mana](#dimana)
+  * [Dukungan Komunitas](#dukungan)
+* [Sejarah NodeJS](#sejarah)
+* [Memulai NodeJS](#memulai)
+* [Lebih Dalam Tentang NodeJS](#lebih-dalam)
+* [Aplikasi NodeJS Pertama](#aplikasi-pertama)
+    * [Koneksi ke GitHub API](#koneksi)
+    * [Membaca Data GitHub API](#membaca)
+    * [Parsing Data GitHub API](#parsing)
+    * [Mencetak Hasil](#mencetak)
+    * [Refactor: Error Handling](#refactor-error)
+    * [Refactor #2: Modular Refactor](#refactor-modular)
+    * [Refactor 3: Support Multiple Account](#refactor-multiple)
+    * [Command Line Argv](#command)
+* [Kesimpulan](#kesimpulan)
+
+## <a name='apa-itu-nodejs'></a> Apa itu NodeJS
 
 ![nodejs-logo](nodejs-logo.png)
 
@@ -55,13 +75,13 @@ Proses seperti ini menjadi efektif ketika sebuah _web server_ menerima banyak _r
 
 Disisi yang lain, _non-blocking_ _server_ akan menerima semua _request_ yang masuk sehingga terjadinya _request timeout_ akan berkurang. Meskipun si pengguna tetap harus menunggu, paling tidak proses antrian sudah tertangani dengan baik.
 
-## JavaScript Ada Dimana-mana
+## <a name='dimana'></a> JavaScript Ada Dimana-mana
 
 Selain itu, **JavaScript is everywhere!** Kita mau coding untuk _web app_, pasti bersentuhan dengan yang namanya JavaScript. Mobile bisa, iOT, Robotic, semua bisa!
 
 Dan karena semua bahasanya sudah sama, meski beberapa API dan library tidak sama kita jadi tidak perlu mengubah _mindset_ kita ketika _coding_ JavaScript di _client_, dan ketika _coding_ bahasa lain di _server_. Sekarang kita bisa melakukan dengan bahasa yang sama!
 
-## Dukungan Komunitas
+## <a name='dukungan'></a> Dukungan Komunitas
 
 Dan terakhir, komunitas NodeJS cukup besar. Ada lebih dari 60 juta paket yang tersedia di [ NPM ](https://npmjs.com), sebuah paket manager NodeJS dan banyak pula disponsori oleh perusahaan-perusahaan papan atas, diantaranya: IBM, Wallmart, Netflix, Microsoft, HP, Groupon, Mozilla, Flicker, Uber, PayPal, dan lain sebagainya.
 
@@ -69,7 +89,7 @@ Bahkan IBM di akhir tahun 2015 mengakuisisi StrongLoop, sebuah perusahaan yang m
 
 Dan di Indonesia sendiri, kita juga sudah mulai beberapa yang menggunakan NodeJS di _production_. Sebut saja [UrbanHire](https://www.urbanhire.com/), [KodeFox](https://kodefox.com/), [SaleStock](https://www.salestockindonesia.com/), [DyCode](https://dycode.co.id/), [Cermati](https://www.cermati.com/), dan tentunya [HACKTIV8](https://hacktiv8.com/) yang menjadikan NodeJS sebagai poros dari kurikulumnya.
 
-## Sejarah NodeJS
+## <a name='sejarah'></a> Sejarah NodeJS
 
 NodeJS diprakarsai oleh Ryan Dahl yang pertama kali di rilis di tahun **2009** . Ada video _youtube_ -nya yang pada saat dia mendemokan node pertama kalinya di JSConf.eu, _mind blowing_!
 
@@ -85,7 +105,7 @@ Pada saat it node di backing oleh perusahaan namanya [Joyent](https://www.joyent
 
 Masih di tahun yang sama, tepatnya 1 bulan setelah proses rujuk, versi baru muncul lagi, versi 5.  Dan terakhir, tahun ini tepatnya di April muncul versi 6 yang seperti versi 4 merupakan versi Long Time Support atau LTS. Artinya jika kamu atau perusahaan mencari versi yang paling aman dan akan di support lama, gunakanlah versi 6 ini.
 
-## Memulai NodeJS
+## <a name='memulai'></a> Memulai NodeJS
 
 Untuk dapat menggunakan NodeJS, tentunya kita perlu melakukan proses instalasi NodeJS di komputer kita. Caranya gampang, bisa langsung ke official website node-nya di nodejs.org. Ada untuk semua OS baik itu Linux, Mac ataupun Windows.
 
@@ -102,7 +122,7 @@ Apabila sudah terinstall, mari kita bermain-main dengan _tools_ yang bernama REP
 
 ![repl](repl.gif)
 
-## Lebih Dalam Tentang NodeJS
+## <a name='lebih-dalam'></a> Lebih Dalam Tentang NodeJS
 
 Mari kita gali lebih dalam tentang NodeJS. Kita akan melihat dan menggunakan _build-in function_ yang disediakan oleh NodeJS. Untuk melihat apa saja _build-in function_ yang tersedia bisa ke dokumentasi [NodeJS disini](https://nodejs.org/dist/latest-v6.x/docs/api/).
 
@@ -148,7 +168,7 @@ http.get('http://nodejs.org/dist/index.json', (res) => {
 
 Contoh _code_ diatas adalah bagaimana kita mengambil data dari sebuah website `http://nodejs.org/dist` dalam format JSON. Berikutnya dicek apakah url yang diberikan valid atau tidak. Dan ketika url valid dan data yang kita inginkan ada, maka tampilkan dengan perintah `console.log`.
 
-## Aplikasi NodeJS Pertama
+## <a name='aplikasi-pertama'></a> Aplikasi NodeJS Pertama
 
 Mari kita membuat aplikasi NodeJS pertama dengan satu atau beberapa _build-in function_ yang disediakan oleh NodeJS.
 
@@ -200,7 +220,7 @@ Langkah-langkahnya cukup sederhana. Pertama, kita perlu cari tahu gimana cara ko
 
 Ok, langsung kita mulai saja yuk!
 
-### Koneksi ke GitHub API
+### <a name='koneksi'></a> Koneksi ke GitHub API
 
 Mari kita mulai langkah pertama. Untuk GitHub API kita bisa googling "api github" dan kita bisa dapat dokumentasi [github API](https://developer.github.com/v3/users/) -nya. Dan yang kita cari juga cukup jelas, kita ingin mendapatkan detil informasi dari sebuah akun GitHub. Jadi kita bisa gunakan API "Get a single user". Jadi misalnya saya bisa dapat detil akun saya dengan cara seperti ini: [api.github.com/users/rizafahmi](http://api.github.com/users/rizafahmi). Dari situ kita bisa dapat nama, email, _followers_ dan lain-lain.
 
@@ -282,7 +302,7 @@ Nah sekarang, kalau kita execute lagi, hasilnya jadi 200, artinya sudah ok tingg
 
 
 
-### Membaca Data GitHub API
+### <a name='membaca'></a> Membaca Data GitHub API
 
 Ok, sekarang kita lanjut ke todo kedua kita yang adalah proses membaca data. Kalau kita lihat kembali di dokumentasi HTTPS, di code sample sudah disertakan gimana cara membaca data, dengan method `response.on('data')` . Langsung aja kita coba baca data yang didapat dari GitHubAPI. Dan karena data yang kita terima bentuknya stream atau satu per satu, kita harus ngumpulin dulu data yang kita dapat ke satu variable dan begitu ketemu data terakhir, baru kita console.log. Gimana caranya kita tau data sudah diterima semua? Kita bisa menggunakan method `response.on('end')` . Langsung kita praktekkan aja ya.
 
@@ -313,7 +333,7 @@ Sekarang kita coba hasil dari body seperti apa? Dan kita akan mendapatkan datany
 
 Itu artinya kita sudah bisa melakukan langkah berikutnya, yaitu parsing datanya.
 
-### Parsing Data GitHub API
+### <a name='parsing'></a> Parsing Data GitHub API
 
 Sekarang kita masuk ke todo kita yang ketiga, yang adalah parsing data. Gimana cara kita parsing data? Kita kan berharap datanya dalam bentuk JSON object. Tapi data body yang kita terima tadi kan bentuknya string. Nah di JavaScript ada method atau class yang dapat melakukan operasi mengubah dan membaca JSON, baik itu dari string ataupun sebaliknya dari JSON object menjadi string. Nah, kita bisa manfaatkan modul ini. Kalo kita buka [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) disitu ada method namanya `JSON.parse()` . Nah pas nih, kita bisa gunakan ini. Caranya cukup gampang dan bisa langsung kita implementasikan.
 
@@ -339,7 +359,7 @@ Sekarang kita masuk ke todo kita yang ketiga, yang adalah parsing data. Gimana c
 
 Kita coba eksekusi lagi, nah sekarang _instead of string_, kita dapat tipe datanya sudah berubah menjadi object. Itu artinya parsing data kita berhasil.
 
-### Mencetak Hasil
+### <a name='mencetak'></a> Mencetak Hasil
 
 Nah sekarang task terakhir kita, yang adalah mencetak hasilnya. Sebelum mencetak hasilnya, kita tentukan dulu apa yang mau kita cetak. Kita akan menampilkan nama, jumlah public reponya dan follower-nya. Ok, kita buat aja fungsi untuk mencetak hasilnya.
 
@@ -368,7 +388,7 @@ Riza Fahmi owns 214 repo(s) and has 98 follower(s)
 
 Sip! Tugas terakhir kita selesai.
 
-### Refactor: Error Handling
+### <a name='refactor-error'></a> Refactor: Error Handling
 
 Aplikasi kita sudah selesai, tapi aplikasi kita saat ini baru memikirkan versi optimis dari alur kerja aplikasi. Gimana seandainya kalau _username_ tidak ditemukan? Kita coba ya. Kita ganti username supaya usernamenya tidak ditemukan.
 
@@ -401,7 +421,7 @@ Sekarang kita coba lagi, hasilnya sudah cukup user friendly.
 
 Pesan _error_ menjadi lebih _user friendly_ kan :)
 
-## Refactor #2: Modular Refactor
+### <a name='refactor-modular'></a> Refactor #2: Modular Refactor
 
 Sekarang kita akan me-refactor lebih jauh. Kita akan membuat code kita lebih modular. Lebih modular gimana? Ide nya adalah supaya modul _get profile_ yang kita buat ini dapat digunakan berkali-kali tanpa ada duplikasi code. Kita ingin nantinya kita dapat memanggil _get profile_ seperti berikut.
 
@@ -495,7 +515,7 @@ Jadi ada hasil yang datang duluan, misalnya dengan jumlah repo yang lebih sediki
 
 Hal ini berbeda dengan bahasa pemrograman sequential. Jika di sequential, urutannya sudah pasti sama. Karena begitu line 5 di eksekusi dia akan menunggu sampai hasilnya balik dan nge-print kemudian baru dia akan mengeksekusi line berikutnya dan seterusnya.
 
-## Refactor 3: Support Multiple Account
+### <a name='refactor-multiple'></a> Refactor 3: Support Multiple Account
 
 Refactor terakhir nih! Setelah sebelumnya kita sudah bisa mendapatkan satu atau lebih informasi akun github, sekarang kita akan refactor sehingga kita cukup menyediakan array of username, kemudian aplikasi node kita akan mencari info tersebut dan print ke console. Jika sebelumnya ada perulangan code di `app.js` kita. Kita memanggil `profile.get` tiga kali. Dan repetisi didalam code tidak baik.
 
@@ -532,7 +552,7 @@ users.map(profile.get)
 
 Wih, elegan sekali! Coba eksekusi lagi. Hasilnya tetap sama, tentu saja.
 
-## Command Line Argv
+### <a name='command'></a> Command Line Argv
 
 Terakhir, saatnya 'menyulap' aplikasi kita menjadi _usable CLI_, atau command line application. Kalau saat ini jika kita ingin mencari tahu profile github seseorang, kita harus edit file `app.js` kita kemudian kita eksekusi dengan cara node app.js. Nah, sekarang biar lebih sempurna, gimana caranya supaya kita bisa dapatkan profil seseorang langsung dari command line tanpa harus bolak-balik mengedit file source kita?!
 
@@ -584,7 +604,7 @@ Riza Fahmi owns 214 repo(s) and has 98 follower(s)
 ```
 
 
-## Kesimpulan
+## <a name='kesimpulan'></a> Kesimpulan
 
 Banyak sekali hal-hal baru yang sudah kita pelajari bersama. Sebagai penutup mari kita merekap apa saja yang sudah kita pelajari dari artikel ini:
 
