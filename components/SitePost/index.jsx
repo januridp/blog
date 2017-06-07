@@ -7,6 +7,7 @@ import ReadNext from '../ReadNext'
 import './style.css'
 import '../../static/css/highlight.css'
 import '../../static/css/monokai.css'
+import ReactDisqusThread from 'react-disqus-thread'
 
 import Footer from '../Footer'
 
@@ -30,6 +31,12 @@ class SitePost extends React.Component {
             <div className='date-published'>
               <em>Published {moment(post.date).format('D MMM YYYY')}</em>
             </div>
+            <ReactDisqusThread
+              shortname='riza-fahmi'
+              identifier={post.path}
+              title='Comments'
+              url='http://localhost:3001/test'
+        />
           </div>
           <div className='footer'>
             <ReadNext post={post} {...this.props} />
