@@ -256,5 +256,5 @@ Dan dengan demikian kita sudahi dulu artikel kedua untuk seri ini. Buat yang ing
 
 ## Berikutnya
 
-Di artikel berikutnya kita akan bermain-main dengan HTML form dan login. Pertanyaan atau komentar langsung saja sampaikan di _comment box_ dibawah ya. Sampai bertemu di artikel berikutnya!
+Di artikel berikutnya kita akan bermain-main dengan HTML form dan registrasi user. Pertanyaan atau komentar langsung saja sampaikan di _comment box_ dibawah ya. Sampai bertemu di artikel berikutnya!
 
