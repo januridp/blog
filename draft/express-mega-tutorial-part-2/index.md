@@ -4,10 +4,10 @@ date: "2017-06-15T12:04:17.000Z"
 layout: post
 path: "/express-mega-tutorial-part-2/"
 category: "NodeJS, Express, Introduction"
-description: "Artikel ini merupakan bagian pertama dari seri mega tutorial dimana saya mendokumentasikan pengalaman saya belajar, menggunakan dan mengajar NodeJS dan Express web framework."
+description: "Artikel ini merupakan bagian kedua dari seri mega tutorial dimana saya mendokumentasikan pengalaman saya belajar, menggunakan dan mengajar NodeJS dan Express web framework."
 ---
 
-Artikel ini merupakan bagian pertama dari seri mega tutorial dimana saya mendokumentasikan pengalaman saya belajar, menggunakan dan mengajar [NodeJS](https://nodejs.org/en/) dan [Express](http://expressjs.com/) web framework.
+Artikel ini merupakan bagian kedua dari seri mega tutorial dimana saya mendokumentasikan pengalaman saya belajar, menggunakan dan mengajar [NodeJS](https://nodejs.org/en/) dan [Express](http://expressjs.com/) web framework.
 
 Aplikasi yang kita buat sepanjang seri ini adalah aplikasi _online course_ sederhana yang memiliki lebih dari cukup untuk mendemonstrasikan kehebatan NodeJS, Express dan teman-temannya. Kita namakan saja `express_course`.
 
