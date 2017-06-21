@@ -66,7 +66,9 @@ Atau juga dengan menggunakan metode lain seperti `sudo service mongod start` di 
 
 Dan untuk meyakinkan service mongodb kita sudah jalan, kita bisa menggunakan MongoDB GUI seperti [Robomongo](https://robomongo.org/) ataupun [MongoDB Compass](https://www.mongodb.com/products/compass) dan setting koneksi ke localhost dan port 27017. Apabila berhasil, selamat! Artinya mongodb siap digunakan.
 
-Untuk interface ke NodeJS kita akan menggunakan [Mongoose](http://mongoosejs.com/) sebagai _Object Document Mapper_ atau ODM. Menggunakan ODB mempermudah kita dalam menggunakan MongoDB dalam project kita. Mari kita install Mongoose di project kita.
+### Setting Up Mongoose ODM
+
+Untuk interface ke NodeJS kita akan menggunakan [Mongoose](http://mongoosejs.com/) sebagai _Object Document Mapper_ atau ODM. Menggunakan ODM mempermudah kita dalam menggunakan MongoDB dalam project kita. Mari kita install Mongoose di project kita.
 
 ```text
 $ npm install mongoose
@@ -102,6 +104,8 @@ Connected to mongodb!
 ```
 
 Sip! Kita sudah berhasil connect ke mongodb. Sekarang mari kita membuat model untuk user yang akan kita gunakan untuk login. Kita akan menyimpan semua model kedalam sebuah folder `models`. Buat foldernya dan buat file baru didalam folder tersebut.
+
+### Skema User
 
 ```text
 $ mkdir models && cd models
@@ -158,6 +162,262 @@ Terakhir, kita export skema usernya agar dapat digunakan oleh modul lainnya.
 
 Ok, skema user sudah selesai sekarang saatnya kita membuat route dan template untuk registrasi usernya.
 
+### Form Registrasi
+
+Sebelum membuat template, yuk kita definisikan terlebih dahulu _route_ dan _controller_ untuk modul user di `app.js` dan `controllers/userController.js`.
+
+```javascript
+// app.js
+
+const path = require('path')
+const express = require('express')
+const mongoose = require('mongoose')
+
+const userController = require('./controllers/userController.js')
+
+mongoose.connect('mongodb://localhost/test')
+const db = mongoose.connection
+db.once('open', () => {
+  console.log('Connected to mongodb!')
+})
+
+const app = express()
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+
+app.get('/', (req, res) => {
+  const user = {
+    username: 'riza'
+  }
+  const courses = [
+    { id: 1, title: 'Introduction to ExpressJS' },
+    { id: 2, title: 'Database with NodeJS and ExpressJS' }
+  ]
+
+  return res.render('index', {
+    user: user,
+    title: 'Welcome to Express Course',
+    courses: courses
+  })
+})
+
+app.get('/register', userController.registerForm)
+
+app.listen(3000, (err) => {
+  if (err) throw err
+  console.log('🏃‍♂️ -> http://localhost:3000/')
+})
+```
+
+```javascript
+// controllers/userController.js
+
+const mongoose = require('mongoose')
+
+exports.registerForm = (req, res) => {
+  res.render('register', { title: 'Register' })
+}
+```
+
+Lalu kita masuk ke bagian _views_ nya dan buat sebuah form registrasi dengan nama `views/register.pug`.
+
+```jade
+
+extends layout
+
+block content
+  h2 #{title}
+```
+
+Sekarang mari kita coba. Untuk melihat perubahan setiap kali ada _code_ yang kita tambahkan, kita haru selalu melakukan restart terhadap aplikasi node kita dengan menggunakan Ctrl+c dan memanggil ulang perintah `node app.js`. Ada _tools_ yang bisa kita gunakan untuk membuat hal ini menjadi otomatis. Caranya dengan menggunakan [nodemon](https://nodemon.io). Kita bisa melakukan instalasi secara global dengan perintah `npm install -g nodemon`. Dan sekarang kita dapat menggunakan perintah `nodemon app.js`. Dan setiap ada perubahan dia akan me-reload secara otomatis.
+
+```text
+$ nodemon app.js
+```
+
+Dan sekarang kalau kita menuju ke _route_ register di http://localhost:3000/register, oopps ada error nih!
+
+![error](error.png)
+
+Seperti terlihat ada pesan error: `Cannot read property 'username' of undefined` di `views/layout.pug` baris 11. Dan benar sekali, `layout.pug` kita membutuhkan variable `user.username` sementara di `controllers/userController.js` kita tidak menyertakan variable tersebut. Karena itu untuk sementara kita bisa gunakan kondisi untuk mengecek apakah user ada atau tidak di `views/layout.pug`.
+
+```jade
+html
+  head
+    if title
+      title #{title}
+    else
+      title Express Course
+    block css
+    block js
+  body
+    block header
+      if user
+        h1 #{user.username}
+    block content
+    block footer
+      footer
+        p &copy; 2017 Express Course
+```
+
+Dan kalau browser di refresh sekarang sudah muncul halaman registrasi 🎉. Sebelum kita lanjut pembuatan form registrasi, tampilan web kita saat ini terasa cukup hambar tanpa _styling_. Mari kita tambahkan sedikit styling biar lebih keren.
+
+Nah untuk menambahkan _styling_ kita membutuhkan bantuan [Express](http://expressjs.com/en/starter/static-files.html) lagi. File-file seperti gambar, css, javascript dan lain sebagainya sering disebut dengan _static file_. Dan untuk menggunakannya di Express, kita perlu memberitahu express bahwa kita akan menggunakan static file beserta folder yang akan menjadi destinasinya. Buka file `app.js` dan tambahkan satu baris kode ini.
+
+```app.js
+// app.js
+
+// ...
+const app = express()
+
+app.use(express.static('public'))
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+
+// ...
+```
+
+Kemudian buat folder dengan nama `public` dan masukkan semua static file yang kita butuhkan disana.
+
+```text
+./public
+├── css
+│   ├── main.css
+│   └── vendors
+│       ├── milligram
+│       │   ├── milligram.css
+│       │   ├── milligram.css.map
+│       │   ├── milligram.min.css
+│       │   └── milligram.min.css.map
+│       └── normalize.css
+├── fonts
+├── img
+└── js
+```
+
+Download saja static file-nya [disini](static.zip) dan extract ke public folder. Langkah selanjutnya kita perlu merevisi `layout.pug` dan `register.pug`. `index.pug` nanti saja menyusul. Silakan _copy-paste_ saja file layout dan register dibawah. Kita tidak akan membahas banyak tentang layouting, HTML dan CSS disini. Jadi kita bisa fokus ke pengembangan di sisi server.
+
+```jade
+html
+  head
+    if title
+      title #{title}
+    else
+      title Express Course
+    block css
+      link(href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic", rel="stylesheet")
+      link(href="/css/vendors/normalize.css", rel="stylesheet")
+      link(href="/css/vendors/milligram/milligram.min.css", rel="stylesheet")
+      link(href="/css/main.css", rel="stylesheet")
+    block js
+  body
+    main.wrapper
+      block header
+        nav.navigation
+          .container
+            a.navigation-title(href="/")
+              h1.title Express Course
+            ul.navigation-list.float-right
+              li.navigation-item
+                a.navigation-link(href="/register")
+                  p Register
+              li.navigation-item
+                a.navigation-link(href="/login")
+                  p Login
+        if user
+          h1 #{user.username}
+        .wrapper
+          .section.text-center(style="padding: 64px")
+      .container
+        block content
+
+      .footer.footer
+        .container
+          block footer
+            .copyright &copy; 2017 Express Course
+
+```
+
+Kemudian untuk `register.pug`.
+
+```jade
+extends layout
+
+block content
+  h3.title #{title}
+  .example
+    form(action="/register" method="POST")
+      fieldset
+        label Name
+        input(type="text", placeholder="Your beautiful name", name="name", required)
+        label Email
+        input(type="email", placeholder="Your email address", name="email", required)
+        label Password
+        input(type="password", placeholder="Your super secret password", name="password", required)
+        label Confirm Password
+        input(type="password", placeholder="Confirm your super secret password", name="confirmPassword", required)
+        button.btn.btn-primary.btn-round.btn-block.btn-lg(type="submit") Register
+
+
+```
+
+Lumayan banyak perubahannya ya. Tapi worthed kok. Coba sekarang di refresh. Halaman register kita jadi cukup indah!
+
+
+Dan ketika kita klik button register, maka kita akan bertemu dengan pesan error yang _expected_.
+
+![posterror](posterror.png)
+
+Ok sekarang balik ke `app.js`, kita harus membuat sebuah route ke `/register` yang bertipe `POST`. Tapi sebelum itu kita butuh beberapa tahapan disini:
+
+1. Validasi user input
+2. Registrasi user
+3. Login user secara otomatis
+
+Mari kita mulai dari validasi user input.
+
+#### Validasi User Input
+
+Kita memang sudah melakukan beberapa validasi di sisi database seperti validasi email, dan lain sebagainya. Tapi kita juga perlu melakukan validasi sebelum 'menyentuh' ke database. Misalnya saja ada yang iseng meng-inject kode seperti `<script>` dan lain sebagainya. Dan untuk melakukan itu kita bisa menggunakan _middleware_.
+
+Kita akan menggunakan library [express-validator](https://www.npmjs.com/package/express-validator) untuk membantu kita melakukan validasi. Dan kita juga akan membutuhkan [flash](https://github.com/jaredhanson/connect-flash) untuk menampilkan pesan error.
+Kita juga membutuhkan library [body-parser](https://www.npmjs.com/package/body-parser) untuk berinteraksi dengan form html.
+
+```text
+$ npm install express-validator connect-flash body-parser
+```
+
+Dan kita gunakan di `app.js` kita.
+
+```javascript
+// app.js
+
+const path = require('path')
+const express = require('express')
+const mongoose = require('mongoose')
+const expressValidator = require('express-validator')
+const flash = require('connect-flash')
+
+const userController = require('./controllers/userController.js')
+
+mongoose.connect('mongodb://localhost/test')
+const db = mongoose.connection
+db.once('open', () => {
+  console.log('Connected to mongodb!')
+})
+
+const app = express()
+
+app.use(express.static('public'))
+app.use(expressValidator())
+app.use(flash())
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+
+// ...
+```
 
 
 
